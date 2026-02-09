@@ -1,0 +1,101 @@
+:root {
+  color-scheme: dark;
+  --bg: #070a0d;
+  --panel: #0f171e;
+  --line: #1f303f;
+  --text: #e8f1f7;
+  --muted: #9fb6c8;
+  --accent: #65d6ff;
+  --accent-2: #87ffda;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at 10% 0%, #11314a 0%, var(--bg) 55%);
+  color: var(--text);
+}
+
+.page { max-width: 980px; margin: 0 auto; padding: 24px 20px 48px; }
+.hero { padding: 42px 0; }
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+h1 { font-size: clamp(2rem, 6vw, 4rem); line-height: 1.05; margin: 14px 0; }
+h2 { margin: 0 0 10px; font-size: clamp(1.3rem, 3vw, 2rem); }
+p, li { color: var(--muted); line-height: 1.6; }
+.cta {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: #00131f;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  text-decoration: none;
+  font-weight: 700;
+}
+.section {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(15, 23, 30, 0.85);
+}
+.steps ol { padding-left: 18px; }
+.lead-form, .resend-form {
+  display: grid;
+  gap: 12px;
+}
+label { display: grid; gap: 6px; color: var(--muted); font-size: 14px; }
+input, textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #0a1218;
+  color: var(--text);
+}
+button {
+  width: fit-content;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #2d4e67;
+  background: #11324a;
+  color: var(--text);
+  cursor: pointer;
+}
+.honeypot { display: none; }
+.status { font-size: 14px; }
+.status.success { color: #86ffc7; }
+.status.error { color: #ff9d9d; }
+.status.info { color: #b9dfff; }
+.notice {
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+}
+.notice.confirmed { border-color: #2f6f50; color: #9dffce; }
+.notice.error { border-color: #6f2f2f; color: #ffacac; }
+footer {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .page { padding: 16px 14px 32px; }
+  .section { padding: 16px; }
+}

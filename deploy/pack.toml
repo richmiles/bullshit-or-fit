@@ -1,0 +1,10 @@
+[project]
+name = "bullshit-or-fit"
+health_path = "/healthz"
+
+[build]
+image = "ghcr.io/richmiles/bullshit-or-fit"
+
+[checks]
+health_retries = 45
+health_delay_seconds = 2
