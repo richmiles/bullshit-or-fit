@@ -15,6 +15,45 @@ const CONFIRM_STATES = {
   error: 'Confirmation failed. Please request another confirmation email.',
 }
 
+const SIGNAL_CARDS = [
+  {
+    title: 'Employment continuity',
+    description:
+      'Cross-check employer claims against public web footprint, domain history, and timeline consistency.',
+  },
+  {
+    title: 'Credential plausibility',
+    description:
+      'Flag mismatches between claimed education, certifications, and available third-party corroboration.',
+  },
+  {
+    title: 'Identity and location clues',
+    description:
+      'Review behavioral and source signals that suggest synthetic profiles, spoofing, or credibility gaps.',
+  },
+]
+
+const WORKFLOW_STEPS = [
+  {
+    title: 'Submit candidate details',
+    detail: 'Share the claim set you want verified before scheduling interviews.',
+  },
+  {
+    title: 'Review evidence trace',
+    detail: 'Bullshit or Fit assembles source-backed findings and confidence indicators.',
+  },
+  {
+    title: 'Decide with your team',
+    detail: 'You get a pass, investigate, or decline recommendation with human review in control.',
+  },
+]
+
+const DECISION_BRIEF_ITEMS = [
+  'Claim-by-claim verdict with confidence notes',
+  'Source trail for quick recruiter handoff',
+  'Recommended next step: pass, investigate, or decline',
+]
+
 export function App() {
   const [config, setConfig] = useState(DEFAULT_CONFIG)
   const [form, setForm] = useState({
@@ -114,117 +153,168 @@ export function App() {
 
   return (
     <div className="page">
-      <header className="hero">
-        <div className="badge">Hiring Signal Intelligence</div>
-        <h1>{config.headline}</h1>
-        <p>{config.subheadline}</p>
-        <a className="cta" href="#lead-form">{config.cta}</a>
+      <header className="hero section-shell">
+        <div className="hero-copy">
+          <div className="badge">Candidate Risk Screening</div>
+          <h1>{config.headline}</h1>
+          <p className="hero-lead">{config.subheadline}</p>
+          <div className="hero-actions">
+            <a className="cta" href="#lead-form">{config.cta}</a>
+            <a className="ghost-cta" href="#how-it-works">See process</a>
+          </div>
+          <ul className="hero-points">
+            <li>Evidence-first screening before interview scheduling</li>
+            <li>No black-box hiring decisions or opaque scoring</li>
+            <li>Built for recruiter and hiring manager workflows</li>
+          </ul>
+        </div>
+        <aside className="hero-panel" aria-label="Verification coverage">
+          <p className="panel-kicker">Signal Matrix</p>
+          <h2>What gets checked in every screening cycle</h2>
+          <ul>
+            <li>Resume claim consistency across public sources</li>
+            <li>Employer and domain legitimacy indicators</li>
+            <li>Credential plausibility and timeline anomalies</li>
+            <li>Identity risk clues for synthetic or spoofed profiles</li>
+          </ul>
+          <p className="panel-note">
+            Output is packaged as a decision brief your team can review in minutes.
+          </p>
+        </aside>
       </header>
 
       {confirmMessage && <section className={`notice ${confirmState}`}>{confirmMessage}</section>}
 
       <main>
-        <section className="section">
-          <h2>The Problem</h2>
-          <p>
-            Interviews are expensive. Fake titles, inflated credentials, and fabricated employers slip through before you detect risk.
-          </p>
-        </section>
-
-        <section className="section">
-          <h2>The Solution</h2>
-          <p>
-            Bullshit or Fit cross-references resume claims against public records, domain intelligence, and verifiable web footprint data.
-          </p>
+        <section className="section-shell proof-strip">
+          <p>Fast hiring needs fast validation, not guesswork.</p>
           <ul>
-            <li>Credential + employer plausibility checks</li>
-            <li>Evidence trace with confidence score</li>
-            <li>Clear pass/fail recommendation for screening</li>
+            <li>3-step review cycle</li>
+            <li>Source-backed evidence trace</li>
+            <li>Built-in confirmation workflow</li>
           </ul>
         </section>
 
-        <section className="section steps">
-          <h2>How It Works</h2>
-          <ol>
-            <li>Submit candidate profile and claim set.</li>
-            <li>We run multi-source verification checks.</li>
-            <li>You receive a decision brief before interview scheduling.</li>
+        <section className="section-shell">
+          <h2>Why good teams still miss fake profiles</h2>
+          <p>
+            Interviews are expensive, and recruiters are expected to move fast. Inflated titles, fake employers, and synthetic personas can
+            slip through when screening depends on manual gut checks.
+          </p>
+        </section>
+
+        <section className="section-shell">
+          <h2>What Bullshit or Fit verifies</h2>
+          <p>
+            Bullshit or Fit cross-references candidate claims against verifiable web evidence so your team can triage risk before interviews.
+          </p>
+          <div className="signal-grid">
+            {SIGNAL_CARDS.map((card) => (
+              <article className="signal-card" key={card.title}>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="how-it-works" className="section-shell">
+          <h2>How it works</h2>
+          <ol className="workflow">
+            {WORKFLOW_STEPS.map((step) => (
+              <li key={step.title}>
+                <h3>{step.title}</h3>
+                <p>{step.detail}</p>
+              </li>
+            ))}
           </ol>
         </section>
 
-        <section className="section trust">
-          <h2>Built for Responsible Hiring</h2>
+        <section className="section-shell trust-panel">
+          <h2>What you get before interview scheduling</h2>
+          <ul className="brief-list">
+            {DECISION_BRIEF_ITEMS.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
           <p>
             Bullshit or Fit provides screening intelligence, not employment decisions. Human review stays in control.
           </p>
         </section>
 
-        <section id="lead-form" className="section form-section">
-          <h2>Get Early Access</h2>
-          <form onSubmit={onSubmit} className="lead-form">
-            <label>
-              Name
-              <input
-                value={form.name}
-                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                required
-              />
-            </label>
-            <label>
-              Work Email
+        <section id="lead-form" className="section-shell form-section">
+          <div className="form-intro">
+            <h2>Get early access</h2>
+            <p>
+              Tell us what roles you are hiring for and we will walk you through the first verification workflow.
+            </p>
+          </div>
+          <div className="form-wrap">
+            <form onSubmit={onSubmit} className="lead-form">
+              <label>
+                Name
+                <input
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  required
+                />
+              </label>
+              <label>
+                Work Email
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                  required
+                />
+              </label>
+              <label>
+                Company
+                <input
+                  value={form.company}
+                  onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
+                />
+              </label>
+              <label>
+                What role are you hiring for?
+                <textarea
+                  value={form.message}
+                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                  rows={4}
+                />
+              </label>
+              <label className="honeypot" aria-hidden="true">
+                Website
+                <input
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))}
+                />
+              </label>
+              <button type="submit" disabled={status === 'submitting'}>
+                {status === 'submitting' ? 'Submitting...' : 'Request Access'}
+              </button>
+            </form>
+            {statusMessage && <p className={`status ${status}`}>{statusMessage}</p>}
+
+            <form onSubmit={onResend} className="resend-form">
+              <h3>Need another confirmation email?</h3>
               <input
                 type="email"
-                value={form.email}
-                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                placeholder="you@company.com"
+                value={resendEmail}
+                onChange={(e) => setResendEmail(e.target.value)}
                 required
               />
-            </label>
-            <label>
-              Company
-              <input
-                value={form.company}
-                onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
-              />
-            </label>
-            <label>
-              What role are you hiring for?
-              <textarea
-                value={form.message}
-                onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                rows={4}
-              />
-            </label>
-            <label className="honeypot" aria-hidden="true">
-              Website
-              <input
-                tabIndex={-1}
-                autoComplete="off"
-                value={form.website}
-                onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))}
-              />
-            </label>
-            <button type="submit" disabled={status === 'submitting'}>
-              {status === 'submitting' ? 'Submitting...' : 'Request Access'}
-            </button>
-          </form>
-          {statusMessage && <p className={`status ${status}`}>{statusMessage}</p>}
-
-          <form onSubmit={onResend} className="resend-form">
-            <h3>Need another confirmation email?</h3>
-            <input
-              type="email"
-              placeholder="you@company.com"
-              value={resendEmail}
-              onChange={(e) => setResendEmail(e.target.value)}
-              required
-            />
-            <button type="submit">Resend confirmation</button>
-          </form>
-          {resendMessage && <p className="status info">{resendMessage}</p>}
+              <button type="submit">Resend confirmation</button>
+            </form>
+            {resendMessage && <p className="status info">{resendMessage}</p>}
+          </div>
         </section>
       </main>
 
-      <footer>
+      <footer className="site-footer">
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
         <span>Verification support only. Final hiring decisions require human review.</span>
